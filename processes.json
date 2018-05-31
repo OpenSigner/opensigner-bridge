@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "WalletConnect bridge",
+      "name": "opensigner bridge",
       "script": "build/index.js",
       "max_restarts": 5,
       "error_file": "logs/bridge.stderr.log",

@@ -1,12 +1,12 @@
-# WalletConnect bridge
+# OpenSigner bridge
 
-Bridge server for [walletconnect](https://walletconnect.org) protocol.
+Bridge server for [OpenSigner](https://github.com/opensigner) protocol.
 
 ### Setup
 
 ```bash
-$ git clone git@github.com:maticnetwork/walletconnect-bridge.git
-$ cd walletconnect-bridge
+$ git clone git@github.com:opensigner/opensigner-bridge.git
+$ cd opensigner-bridge
 $ npm install
 
 # start redis

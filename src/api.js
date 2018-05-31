@@ -50,11 +50,11 @@ function sendWebHook(details, sessionId, transactionId, dappName) {
 const router = Router()
 
 // Add hello route
-router.get('/hello', async(req, res) => {
+router.get('/hello', async (req, res) => {
   return res.send({
     message: 'Hello world, this is Wallet Connect',
-    baseURL: 'https://walletconnect.matic.network',
-    webhook: 'https://walletconnect.matic.network/notification/new'
+    baseURL: 'https://opensigner.matic.network',
+    webhook: 'https://opensigner.matic.network/notification/new'
   })
 })
 
@@ -65,7 +65,7 @@ router.get('/hello', async(req, res) => {
 const sessionRouter = Router()
 
 // create new session
-sessionRouter.post('/new', async(req, res) => {
+sessionRouter.post('/new', async (req, res) => {
   const sessionId = uuidv4()
   try {
     await keystore.setSessionRequest(sessionId, req.body)
@@ -84,7 +84,7 @@ sessionRouter.post('/new', async(req, res) => {
   }
 })
 
-sessionRouter.put('/:sessionId', async(req, res) => {
+sessionRouter.put('/:sessionId', async (req, res) => {
   const {fcmToken, walletWebhook, data} = req.body
   const {sessionId} = req.params
   try {
@@ -108,7 +108,7 @@ sessionRouter.put('/:sessionId', async(req, res) => {
   }
 })
 
-sessionRouter.get('/:sessionId', async(req, res) => {
+sessionRouter.get('/:sessionId', async (req, res) => {
   try {
     const {sessionId} = req.params
     const data = await keystore.getSessionData(sessionId)
@@ -134,7 +134,7 @@ sessionRouter.get('/:sessionId', async(req, res) => {
 const transactionRouter = Router({mergeParams: true})
 
 // create new transaction
-transactionRouter.post('/new', async(req, res) => {
+transactionRouter.post('/new', async (req, res) => {
   const transactionId = uuidv4()
   const {sessionId} = req.params
   const {data, dappName} = req.body
@@ -160,7 +160,7 @@ transactionRouter.post('/new', async(req, res) => {
   }
 })
 
-transactionRouter.get('/:transactionId', async(req, res) => {
+transactionRouter.get('/:transactionId', async (req, res) => {
   try {
     const {sessionId, transactionId} = req.params
     const data = await keystore.getTxRequest(sessionId, transactionId)
@@ -186,7 +186,7 @@ transactionRouter.get('/:transactionId', async(req, res) => {
 const transactionStatusRouter = Router({mergeParams: true})
 
 // create new transaction status
-transactionStatusRouter.post('/new', async(req, res) => {
+transactionStatusRouter.post('/new', async (req, res) => {
   const {sessionId, transactionId} = req.params
   const {data} = req.body
   try {
@@ -203,7 +203,7 @@ transactionStatusRouter.post('/new', async(req, res) => {
   }
 })
 
-transactionStatusRouter.get('/', async(req, res) => {
+transactionStatusRouter.get('/', async (req, res) => {
   const {sessionId, transactionId} = req.params
   try {
     const data = await keystore.getTxStatus(sessionId, transactionId)
@@ -227,7 +227,7 @@ transactionStatusRouter.get('/', async(req, res) => {
 //
 
 const notificationRouter = Router({mergeParams: true})
-notificationRouter.post('/new', async(req, res) => {
+notificationRouter.post('/new', async (req, res) => {
   const {fcmToken, sessionId, transactionId, dappName} = req.body
   if (!fcmToken || !sessionId || !transactionId || !dappName) {
     return res.status(412).json({

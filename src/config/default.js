@@ -14,7 +14,7 @@ export default {
   env: process.env.NODE_ENV || 'development',
   debug: process.env.NODE_ENV !== 'production',
   app: {
-    name: process.env.APP_NAME || 'WalletConnect Bridge Server',
+    name: process.env.APP_NAME || 'OpenSigner Bridge Server',
     host: process.env.HOST || 'localhost',
     port: parseInt(process.env.PORT || 3000, 10)
   },
